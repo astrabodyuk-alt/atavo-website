@@ -1,27 +1,46 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Syne, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  variable: "--font-dm",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "ATAVO — Elevate Your Business Online",
   description:
-    "Modern websites, SEO, Apps & Automation for UK businesses. Build a strong online presence with ATAVO.",
-  keywords: "web design UK, SEO, apps, automation, online presence, ATAVO",
+    "Modern websites, SEO, apps & automation for UK businesses. Built by an entrepreneur like you. 7-day delivery from £499.",
+  openGraph: {
+    title: "ATAVO — Elevate Your Business Online",
+    description: "Modern websites, SEO, apps & automation for UK businesses.",
+    url: "https://atavo.co.uk",
+    siteName: "ATAVO",
+    locale: "en_GB",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={dmSans.variable}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${syne.variable} ${jakarta.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-[#080808] text-white">
+        {children}
+      </body>
     </html>
   );
 }

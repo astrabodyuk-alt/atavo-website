@@ -3,47 +3,31 @@
 import React, { useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 
-// --- ATAVO service data ---
+// --- ATAVO real projects ---
 const accordionItems = [
   {
     id: 1,
-    title: "Modern Websites",
-    label: "Websites",
-    description: "Custom design tailored to your brand",
-    imageUrl:
-      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop",
+    title: "AZ Audio Optique",
+    label: "Web Design",
+    description: "Full brand website for an audio & optical retailer in France.",
+    location: "Plaisir, France",
+    imageUrl: "/images/88_1x_shots_so.png",
   },
   {
     id: 2,
-    title: "SEO & Rankings",
-    label: "SEO",
-    description: "Get found on Google by your ideal customers",
-    imageUrl:
-      "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?q=80&w=2074&auto=format&fit=crop",
+    title: "AstraBody Studio",
+    label: "Web Design",
+    description: "Conversion-focused studio website for a fitness brand in Southampton.",
+    location: "Southampton, England",
+    imageUrl: "/images/777_1x_shots_so.png",
   },
   {
     id: 3,
-    title: "Loyalty Apps",
-    label: "Apps",
-    description: "Branded iOS & Android apps that retain customers",
-    imageUrl:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Automation",
-    label: "Automation",
-    description: "Revenue-generating systems that work 24/7",
-    imageUrl:
-      "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?q=80&w=1974&auto=format&fit=crop",
-  },
-  {
-    id: 5,
-    title: "E-Commerce",
-    label: "E-Commerce",
-    description: "Full online stores with payment & inventory",
-    imageUrl:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop",
+    title: "AstraBody Loyalty App",
+    label: "Mobile App",
+    description: "Custom iOS & Android loyalty app with rewards and in-app upgrades.",
+    location: "",
+    imageUrl: "/images/64_1x_shots_so.png",
   },
 ];
 
@@ -53,6 +37,7 @@ interface AccordionItemData {
   title: string;
   label: string;
   description: string;
+  location: string;
   imageUrl: string;
 }
 
@@ -128,6 +113,15 @@ const AccordionItem = ({ item, isActive, onMouseEnter }: AccordionItemProps) => 
         >
           {item.description}
         </p>
+        {item.location && (
+          <p
+            className={`text-white/40 text-xs mt-0.5 transition-all duration-300 ${
+              isActive ? "opacity-100 max-h-6" : "opacity-0 max-h-0"
+            }`}
+          >
+            📍 {item.location}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -138,7 +132,7 @@ export function LandingAccordionItem() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="services" className="py-24 bg-[#111111]">
+    <section id="projects" className="py-24 bg-[#111111]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-14">
 
@@ -146,14 +140,14 @@ export function LandingAccordionItem() {
           <div className="w-full lg:w-[42%]">
             <AnimatedSection direction="left">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2283FF]/10 border border-[#2283FF]/30 mb-4">
-                <span className="text-[#2283FF] text-sm font-medium">What We Do</span>
+                <span className="text-[#2283FF] text-sm font-medium">Our Work</span>
               </div>
 
               <h2
                 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight mb-4"
                 style={{ fontFamily: "var(--font-syne)" }}
               >
-                Your Business
+                Projects that
                 <br />
                 <span
                   style={{
@@ -163,35 +157,35 @@ export function LandingAccordionItem() {
                     backgroundClip: "text",
                   }}
                 >
-                  Journey
+                  drive results
                 </span>
               </h2>
 
               <p className="text-[#A0A0A0] text-base leading-relaxed mb-8 max-w-md">
-                We elevate your online presence and add automation. From a
-                stunning website to a full revenue-generating system — we
-                build everything your business needs to win online.
+                Real websites and apps built for real businesses. Every project
+                is crafted to convert visitors into customers and keep them
+                coming back.
               </p>
 
-              {/* Pain points */}
+              {/* Stats */}
               <div className="grid grid-cols-2 gap-3 mb-8">
                 {[
-                  { problem: "No website", impact: "Losing clients" },
-                  { problem: "Outdated website", impact: "Invisible online" },
-                  { problem: "No SEO", impact: "Not found on Google" },
-                  { problem: "No system", impact: "No repeat customers" },
+                  { stat: "7-day", label: "Average delivery" },
+                  { stat: "100%", label: "Client satisfaction" },
+                  { stat: "40%+", label: "Avg. retention lift" },
+                  { stat: "3 countries", label: "Clients served" },
                 ].map((item, i) => (
                   <div
                     key={i}
                     className="p-3 rounded-xl bg-[#1c1c1c] border border-[#282828]"
                   >
                     <p
-                      className="text-white text-xs font-semibold"
+                      className="text-[#2283FF] text-sm font-bold"
                       style={{ fontFamily: "var(--font-syne)" }}
                     >
-                      {item.problem}
+                      {item.stat}
                     </p>
-                    <p className="text-[#2283FF] text-xs mt-0.5">{item.impact}</p>
+                    <p className="text-[#A0A0A0] text-xs mt-0.5">{item.label}</p>
                   </div>
                 ))}
               </div>
@@ -207,6 +201,11 @@ export function LandingAccordionItem() {
                 >
                   {accordionItems[activeIndex].title}
                 </p>
+                {accordionItems[activeIndex].location && (
+                  <p className="text-[#525252] text-xs mt-0.5">
+                    📍 {accordionItems[activeIndex].location}
+                  </p>
+                )}
                 <p className="text-[#A0A0A0] text-sm mt-1">
                   {accordionItems[activeIndex].description}
                 </p>

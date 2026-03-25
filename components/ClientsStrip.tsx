@@ -3,16 +3,18 @@
 import AnimatedSection from "./AnimatedSection";
 
 const clients = [
-  "TechStart UK",
-  "London Bites",
-  "FinEdge",
-  "NovaBuild",
-  "SwiftRetail",
-  "GreenLeaf Co",
-  "UrbanFit",
-  "CloudPeak",
-  "BrightMed",
-  "FlowAgency",
+  "Restaurants",
+  "Barbershops",
+  "Beauty Salons",
+  "Architects",
+  "Law Firms",
+  "Real Estate",
+  "Fitness Studios",
+  "E-Commerce",
+  "Healthcare",
+  "Coaches",
+  "Photographers",
+  "Retail Stores",
 ];
 
 export default function ClientsStrip() {

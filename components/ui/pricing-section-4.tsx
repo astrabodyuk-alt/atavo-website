@@ -9,19 +9,14 @@ import NumberFlow from "@number-flow/react";
 import { motion } from "motion/react";
 import { useRef, useState } from "react";
 
-// ATAVO pricing plans
-// Toggle: "Standard" shows full price / "Save 10%" shows discounted price
 const plans = [
   {
     name: "Starter Website",
     description:
       "Get your business online in 7 days with a professional, conversion-ready website.",
-    price: 499,
-    discountedPrice: 449,
-    suffix: "one-time",
-    discountedSuffix: "one-time",
+    oneOffPrice: 499,
+    monthlyPrice: null,
     buttonText: "Get Started",
-    buttonVariant: "outline" as const,
     popular: false,
     includes: [
       "What's included:",
@@ -37,12 +32,9 @@ const plans = [
     name: "Pro / E-Commerce",
     description:
       "A complete digital business platform with e-commerce, advanced SEO, and full CMS.",
-    price: 999,
-    discountedPrice: 899,
-    suffix: "one-time",
-    discountedSuffix: "one-time",
+    oneOffPrice: 999,
+    monthlyPrice: null,
     buttonText: "Get Started",
-    buttonVariant: "default" as const,
     popular: true,
     includes: [
       "Everything in Starter, plus:",
@@ -58,12 +50,9 @@ const plans = [
     name: "App / SaaS Platform",
     description:
       "A fully automated, revenue-generating platform built and maintained every month.",
-    price: 300,
-    discountedPrice: 270,
-    suffix: "per month",
-    discountedSuffix: "per month",
+    oneOffPrice: 2499,
+    monthlyPrice: 350,
     buttonText: "Start Building",
-    buttonVariant: "outline" as const,
     popular: false,
     includes: [
       "What's included:",
@@ -102,7 +91,7 @@ const PricingSwitch = ({ onSwitch }: { onSwitch: (value: string) => void }) => {
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
-          <span className="relative">Standard</span>
+          <span className="relative">One-Off</span>
         </button>
 
         <button
@@ -119,12 +108,7 @@ const PricingSwitch = ({ onSwitch }: { onSwitch: (value: string) => void }) => {
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
-          <span className="relative flex items-center gap-2">
-            Save 10%
-            <span className="text-[10px] font-bold text-amber-300 bg-amber-400/10 px-1.5 py-0.5 rounded-full border border-amber-400/20">
-              NEW
-            </span>
-          </span>
+          <span className="relative">Monthly</span>
         </button>
       </div>
     </div>
@@ -149,11 +133,11 @@ const revealVariants = {
 };
 
 export default function PricingSection4() {
-  const [isDiscounted, setIsDiscounted] = useState(false);
+  const [isMonthly, setIsMonthly] = useState(false);
   const pricingRef = useRef<HTMLDivElement>(null);
 
   const togglePricingPeriod = (value: string) =>
-    setIsDiscounted(parseInt(value) === 1);
+    setIsMonthly(parseInt(value) === 1);
 
   const handleContact = () => {
     const el = document.querySelector("#contact");
@@ -278,8 +262,10 @@ export default function PricingSection4() {
           >
             <Card
               className={cn(
-                "relative text-white border-neutral-800 h-full flex flex-col",
-                plan.popular
+                "relative text-white border-neutral-800 h-full flex flex-col transition-all duration-300",
+                isMonthly && plan.monthlyPrice === null
+                  ? "opacity-40 grayscale"
+                  : plan.popular
                   ? "bg-gradient-to-b from-neutral-800 via-neutral-900 to-neutral-900 shadow-[0px_-10px_200px_0px_#2283FF40] z-20 border-[#2283FF]/40"
                   : "bg-gradient-to-b from-neutral-900 via-neutral-900 to-neutral-950 z-10"
               )}
@@ -297,22 +283,21 @@ export default function PricingSection4() {
                 >
                   {plan.name}
                 </h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-extrabold text-white">
-                    £
-                    <NumberFlow
-                      value={isDiscounted ? plan.discountedPrice : plan.price}
-                      className="text-3xl font-extrabold"
-                    />
-                  </span>
-                  <span className="text-gray-400 ml-1 text-sm">
-                    /{isDiscounted ? plan.discountedSuffix : plan.suffix}
-                  </span>
-                </div>
-                {isDiscounted && (
-                  <p className="text-[#2283FF] text-xs font-medium">
-                    Save £{plan.price - plan.discountedPrice} with this offer
-                  </p>
+                {isMonthly && plan.monthlyPrice === null ? (
+                  <p className="text-sm text-gray-500 mb-2">Not available on monthly</p>
+                ) : (
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-extrabold text-white">
+                      £
+                      <NumberFlow
+                        value={isMonthly ? plan.monthlyPrice! : plan.oneOffPrice}
+                        className="text-3xl font-extrabold"
+                      />
+                    </span>
+                    <span className="text-gray-400 ml-1 text-sm">
+                      /{isMonthly ? "mo" : "one-off"}
+                    </span>
+                  </div>
                 )}
                 <p className="text-sm text-gray-400 mt-2 leading-relaxed">
                   {plan.description}
@@ -322,9 +307,10 @@ export default function PricingSection4() {
               <CardContent className="pt-0 flex flex-col flex-1">
                 <button
                   onClick={handleContact}
+                  disabled={isMonthly && plan.monthlyPrice === null}
                   className={cn(
-                    "w-full mb-6 p-3.5 text-base rounded-xl font-semibold transition-all duration-200 hover:-translate-y-0.5",
-                    plan.popular
+                    "w-full mb-6 p-3.5 text-base rounded-xl font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0",
+                    plan.popular && !(isMonthly && plan.monthlyPrice === null)
                       ? "bg-gradient-to-t from-[#1a6ee8] to-[#2283FF] shadow-lg shadow-[#2283FF]/30 border border-[#2283FF]/50 text-white hover:shadow-xl hover:shadow-[#2283FF]/40"
                       : "bg-gradient-to-t from-neutral-950 to-neutral-700 shadow-lg shadow-neutral-900 border border-neutral-700 text-white hover:border-neutral-500"
                   )}
