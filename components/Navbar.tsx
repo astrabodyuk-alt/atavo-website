@@ -7,7 +7,7 @@ import PillMorphTabs, { type PillTab } from "@/components/ui/pill-morph-tabs";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
-  { label: "Projects", href: "#work" },
+  { label: "Projects", href: "#projects" },
   { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
 ];
