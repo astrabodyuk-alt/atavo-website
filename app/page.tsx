@@ -3,7 +3,7 @@ import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import ClientsStrip from "@/components/ClientsStrip";
 import { LandingAccordionItem } from "@/components/ui/interactive-image-accordion";
 import VerticalTabs from "@/components/ui/vertical-tabs";
-import { ProjectShowcase } from "@/components/ui/project-showcase";
+import { InteractiveSelector } from "@/components/ui/interactive-selector";
 import { UniqueTestimonials } from "@/components/ui/unique-testimonial";
 import PricingSection4 from "@/components/ui/pricing-section-4";
 import Contact from "@/components/Contact";
@@ -22,7 +22,7 @@ export default function Page() {
         <ClientsStrip />
         <LandingAccordionItem />
         <VerticalTabs />
-        <ProjectShowcase />
+        <InteractiveSelector />
         <UniqueTestimonials />
         <PricingSection4 />
         <Contact />
