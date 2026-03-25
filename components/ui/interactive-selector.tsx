@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { FaUtensils, FaDumbbell, FaMicrochip, FaHeartbeat } from "react-icons/fa";
+import { FaGlasses, FaSpa, FaStar } from "react-icons/fa";
 import AnimatedSection from "@/components/AnimatedSection";
 
 interface Project {
@@ -17,52 +17,37 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "LondonEats",
-    subtitle: "Restaurant Platform",
+    title: "AZ Audio Optique",
+    subtitle: "Plaisir, France",
     description:
-      "Full-stack restaurant discovery platform with online ordering, loyalty rewards, and local SEO that drove 3× organic traffic in 60 days.",
-    result: "+312% organic traffic",
-    category: "Website · SEO",
+      "Optical store specialising in prescription glasses and sunglasses — designed to attract local clients and showcase their full eyewear collection.",
+    result: "Web Design",
+    category: "Web Design",
     year: "2024",
-    image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop",
-    icon: <FaUtensils size={20} className="text-white" />,
+    image: "/images/994_1x_shots_so.png",
+    icon: <FaGlasses size={20} className="text-white" />,
   },
   {
-    title: "FlowFit",
-    subtitle: "Gym Management App",
+    title: "AstraBody Studio",
+    subtitle: "Southampton, England",
     description:
-      "Branded iOS & Android fitness app with class bookings, membership management, and automated retention campaigns.",
-    result: "£40k MRR achieved",
-    category: "App · Automation",
+      "Premium body sculpting studio — a conversion-focused website built to drive bookings and communicate their high-end brand experience.",
+    result: "Web Design",
+    category: "Web Design",
     year: "2024",
-    image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop",
-    icon: <FaDumbbell size={20} className="text-white" />,
+    image: "/images/65_1x_shots_so.png",
+    icon: <FaSpa size={20} className="text-white" />,
   },
   {
-    title: "NovaTech",
-    subtitle: "B2B Lead System",
+    title: "AstraBody Loyalty App",
+    subtitle: "Mobile App",
     description:
-      "End-to-end lead generation website with automated CRM workflows, email sequences, and a conversion-optimised landing page.",
-    result: "5× lead volume",
-    category: "Website · Automation",
-    year: "2023",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-    icon: <FaMicrochip size={20} className="text-white" />,
-  },
-  {
-    title: "BrightMed",
-    subtitle: "Healthcare Portal",
-    description:
-      "Patient booking portal with automated appointment reminders, GP integrations, and a 5-star rated mobile experience.",
-    result: "4,000+ bookings/mo",
-    category: "App · Website",
-    year: "2023",
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop",
-    icon: <FaHeartbeat size={20} className="text-white" />,
+      "Mobile loyalty system designed to reward and retain AstraBody clients — keeping them engaged between sessions with points, perks, and offers.",
+    result: "Mobile App",
+    category: "Mobile App",
+    year: "2024",
+    image: "/images/936_1x_shots_so.png",
+    icon: <FaStar size={20} className="text-white" />,
   },
 ];
 
@@ -133,7 +118,7 @@ export function InteractiveSelector() {
                     className="relative flex flex-col justify-end overflow-hidden cursor-pointer transition-all duration-700 ease-in-out"
                     style={{
                       backgroundImage: `url('${project.image}')`,
-                      backgroundSize: isActive ? "auto 100%" : "auto 120%",
+                      backgroundSize: "cover",
                       backgroundPosition: "center",
                       opacity: isAnimated ? 1 : 0,
                       transform: isAnimated ? "translateX(0)" : "translateX(-50px)",
